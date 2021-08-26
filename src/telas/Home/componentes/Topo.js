@@ -1,16 +1,54 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, View, Text, StyleSheet} from 'react-native';
+
+import {carregaTopo} from '../../../services/fakeApi';
 
 import logo from '../../../assets/logo.png';
 
-function Topo() {
-  return (
-    <View style={estilos.topo}>
-      <Image source={logo} style={estilos.imagem} />
-      <Text style={estilos.boasVindas}>Olá Alura</Text>
-      <Text style={estilos.legenda}>Encontre os melhores produtores</Text>
-    </View>
-  );
+// function Topo() {
+//   const [topo, setTopo] = useState({boasVindas: '', legenda: ''});
+
+//   useEffect(() => {
+//     const resultado = carregaTopo();
+//     setTopo(resultado);
+//   }, []);
+
+//   return (
+//     <View style={estilos.topo}>
+//       <Image source={logo} style={estilos.imagem} />
+//       <Text style={estilos.boasVindas}>{topo.boasVindas}</Text>
+//       <Text style={estilos.legenda}>{topo.legenda}</Text>
+//     </View>
+//   );
+// }
+
+class Topo extends React.Component {
+  state = {
+    topo: {
+      boasVindas: '',
+      legenda: '',
+    },
+  };
+
+  atualizaTopo() {
+    const topo = carregaTopo();
+    this.setState({topo});
+  }
+
+  componentDidMount() {
+    this.atualizaTopo();
+  }
+
+  render() {
+    const {boasVindas, legenda} = this.state.topo;
+    return (
+      <View style={estilos.topo}>
+        <Image source={logo} style={estilos.imagem} />
+        <Text style={estilos.boasVindas}>{boasVindas}</Text>
+        <Text style={estilos.legenda}>{legenda}</Text>
+      </View>
+    );
+  }
 }
 
 const estilos = StyleSheet.create({
