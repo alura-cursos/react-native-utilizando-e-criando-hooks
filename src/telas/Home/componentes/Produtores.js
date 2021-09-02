@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, Text, StyleSheet} from 'react-native';
 
-import {carregaProdutores} from '../../../services/fakeApi';
+import {carregaProdutores} from '../../../services/carregaDados';
 import Produtor from './Produtor';
 
 function Produtores({topo: Topo}) {

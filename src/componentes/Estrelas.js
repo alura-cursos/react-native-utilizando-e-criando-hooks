@@ -5,13 +5,19 @@ import estrela from '../assets/estrela.png';
 import estrelaCinza from '../assets/estrelaCinza.png';
 
 function Estrelas({
-  quantidade: quantidadeAntiga,
+  quantidade: quantidadeInicial,
   editavel = false,
   grande = false,
 }) {
-  const [quantidade, setQuantidade] = useState(quantidadeAntiga);
+  const [quantidadeAtual, setQuantidadeAtual] = useState(quantidadeInicial);
 
-  const getImagem = index => (index < quantidade ? estrela : estrelaCinza);
+  const getImagem = (index) => {
+    if (index < quantidadeAtual) {
+      return estrela;
+    } else {
+      return estrelaCinza;
+    }
+  }
   const estilos = funcaoEstilos(grande);
 
   const RenderEstrelas = () => {
@@ -20,7 +26,7 @@ function Estrelas({
       listaEstrelas.push(
         <TouchableOpacity
           key={i}
-          onPress={() => setQuantidade(i + 1)}
+          onPress={() => setQuantidadeAtual(i + 1)}
           disabled={!editavel}>
           <Image source={getImagem(i)} style={estilos.estrela} />
         </TouchableOpacity>,
