@@ -5,9 +5,16 @@ import { carregaTopo } from '../../../servicos/carregaDados';
 import logo from '../../../assets/logo.png';
 
 class Topo extends React.Component {
+    state = {
+        topo: {
+            boasVindas: '',
+            legenda: '',
+        }
+    }
+
     atualizaTopo() {
         const retorno = carregaTopo();
-        console.log(retorno);
+        this.setState({ topo: retorno });
     }
 
     componentDidMount() {
@@ -17,8 +24,8 @@ class Topo extends React.Component {
     render() {
         return <View style={estilos.topo}>
             <Image source={logo} style={estilos.imagem} />
-            <Text style={estilos.boasVindas}>Olá Natalia</Text>
-            <Text style={estilos.legenda}>Encontre os melhores produtores</Text>
+            <Text style={estilos.boasVindas}>{ this.state.topo.boasVindas }</Text>
+            <Text style={estilos.legenda}>{ this.state.topo.legenda }</Text>
         </View>
     }
 }
